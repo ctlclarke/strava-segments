@@ -4,16 +4,20 @@ import (
   "log"
   "net/http"
   "io/ioutil"
+  "os"
 )
 
 func get(url string) string {
+
+  var token string = os.Getenv("STRAVA_TOKEN")
+
   req, err := http.NewRequest("GET", url, nil)
   if err != nil {
     log.Fatal("NewRequest: ", err)
     return ""
   }
   client := &http.Client{}
-  req.Header.Add("Authorization", "Bearer 6651096a94211f2e4a73d4a36db6a35066382adc")
+  req.Header.Add("Authorization", "Bearer " + token)
   resp, err := client.Do(req)
   if err != nil {
     log.Fatal("Do: ", err)
