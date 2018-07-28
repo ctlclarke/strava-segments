@@ -7,52 +7,53 @@ import (
   "os"
   "fmt"
   "encoding/json"
+   "../response_bodies"
 )
 
-func get(url string) string {
+type Foo struct {
+    id string
+}
+
+func get(url string) string{
 
   var token string = os.Getenv("STRAVA_TOKEN")
 
   req, err := http.NewRequest("GET", url, nil)
   if err != nil {
     log.Fatal("NewRequest: ", err)
-    return ""
+    // return ""
   }
   client := &http.Client{}
   req.Header.Add("Authorization", "Bearer " + token)
+  req.Header.Set("Content-Type", "application/json")
   resp, err := client.Do(req)
   if err != nil {
     log.Fatal("Do: ", err)
-    return ""
+    // return ""
   }
 
   defer resp.Body.Close()
   var bodyString string
-
   if resp.StatusCode == http.StatusOK {
     bodyBytes, _ := ioutil.ReadAll(resp.Body)
     bodyString = string(bodyBytes)
   
   var dat map[string]interface{}
 
-  // fmt.Println(dat)
+  var athlete response_bodies.Athlete
 
-  // num := dat["id"]
+  err := json.Unmarshal(bodyBytes, &athlete)
+    if err != nil {
+      fmt.Println("whoops 1")
+        panic(err)
+    }
+    fmt.Println(athlete.Bikes)
 
-  // fmt.Println(num)
   if err := json.Unmarshal(bodyBytes, &dat); err != nil {
+    fmt.Println("whoops 2")
         panic(err)
   }
 
-  // var seggers map[string]interface{}
-
-  // if err := json.Unmarshal(dat["segment_efforts"], &seggers); err != nil {
-  //       panic(err)
-  // } 
-
-  // fmt.Println(seggers)
-  // }
-  fmt.Println(dat["segment_efforts"])
   }
   return bodyString
 }

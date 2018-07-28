@@ -24,7 +24,3 @@ type Club struct {
 	club_type 				string
 	following_count 		int
 }
-
-func (m *Club) Id() int {
-  return m.id
-}
