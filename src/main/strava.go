@@ -1,13 +1,13 @@
 package main
 
 import (
-  "fmt"
+  // "fmt"
   "../api"
 )
 func main() {
 
-  // var stats = api.GetAthleteStats("2316892")
+  // api.GetAthleteStats("2316892")
   // fmt.Println(stats)
-
-  fmt.Println(api.GetMyActivities())
+  api.GetActivity("1599518530")
+  // fmt.Println(api.GetMyActivities())
 }

@@ -5,6 +5,8 @@ import (
   "net/http"
   "io/ioutil"
   "os"
+  "fmt"
+  "encoding/json"
 )
 
 func get(url string) string {
@@ -30,7 +32,27 @@ func get(url string) string {
   if resp.StatusCode == http.StatusOK {
     bodyBytes, _ := ioutil.ReadAll(resp.Body)
     bodyString = string(bodyBytes)
+  
+  var dat map[string]interface{}
+
+  // fmt.Println(dat)
+
+  // num := dat["id"]
+
+  // fmt.Println(num)
+  if err := json.Unmarshal(bodyBytes, &dat); err != nil {
+        panic(err)
   }
 
+  // var seggers map[string]interface{}
+
+  // if err := json.Unmarshal(dat["segment_efforts"], &seggers); err != nil {
+  //       panic(err)
+  // } 
+
+  // fmt.Println(seggers)
+  // }
+  fmt.Println(dat["segment_efforts"])
+  }
   return bodyString
 }
