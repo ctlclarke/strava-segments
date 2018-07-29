@@ -5,18 +5,19 @@ import (
   "net/http"
   "io/ioutil"
   "os"
-  "encoding/json"
-   "../response_bodies"
+  // "encoding/json"
+   // "../response_bodies"
 )
 
 type Foo struct {
     id string
 }
 
-func get(url string) response_bodies.Athlete{
+func get(url string) []byte{
 
   var token string = os.Getenv("STRAVA_TOKEN")
-  var athlete response_bodies.Athlete
+  // var athlete response_bodies.Athlete
+  var bodyBytes []byte
 
   req, err := http.NewRequest("GET", url, nil)
   if err != nil {
@@ -32,11 +33,12 @@ func get(url string) response_bodies.Athlete{
 
   defer resp.Body.Close()
   if resp.StatusCode == http.StatusOK {
-    bodyBytes, _ := ioutil.ReadAll(resp.Body)
-    err := json.Unmarshal(bodyBytes, &athlete)
-    if err != nil {
-        panic(err)
-    }
+    bodyBytes, _ = ioutil.ReadAll(resp.Body)
+    // err := json.Unmarshal(bodyBytes, &athlete)
+    // if err != nil {
+    //     panic(err)
+    // }
   }
-  return athlete
+  return bodyBytes
+  // return athlete
 }
