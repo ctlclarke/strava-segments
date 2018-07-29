@@ -1,9 +1,14 @@
 package api
 import (
-	// "../response_bodies"
+	r "../response_bodies"
 )
-func GetAthleteStats(athleteId string) string {
-  url := "https://www.strava.com/api/v3/athlete/"// + athleteId + "/stats" TODO: qq: this should be athlete__S__
+func GetAthleteStats(athleteId string) r.Athlete {
+  url := "https://www.strava.com/api/v3/athletes/" + athleteId + "/stats"
+  return get(url)
+}
+
+func GetThisAthlete() r.Athlete {
+  url := "https://www.strava.com/api/v3/athlete/"
   return get(url)
 }
 
@@ -12,9 +17,9 @@ func GetAthleteStats(athleteId string) string {
 //   return get(url)
 // }
 
-func GetActivity(activityId string) string {
+func GetActivity(activityId string) r.Athlete {
   url := "https://www.strava.com/api/v3/activities/" + activityId
-  return get(url)
+  return get(url) // TODO: qq: need to work on the 'get' method, could do with it returning a generic
 }
 
 // func GetMyActivities() response_bodies.Club {

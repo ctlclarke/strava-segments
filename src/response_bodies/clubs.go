@@ -1,26 +1,26 @@
 package response_bodies
 
 type Club struct {	
-	id 						int
-	resource_state			int
-	name					string
-	profile_medium			string
-	profile 				string
-	cover_photo 			string
-	cover_photo_small		string
-	sport_type				string
-	city 					string
-	state 					string
-	country 				string
-	private					bool
-	member_count 			int
-	featured 				bool
-	verified 				bool
-	url 					string
-	membership 				string
-	admin					bool
-	owner 					bool
-	description 			string
-	club_type 				string
-	following_count 		int
+	Id 						int `json:"id"`
+	Resource_state			int `json:"resource_state"`
+	Name					string `json:"name"`
+	Profile_medium			string `json:"profile_medium"`
+	Profile 				string `json:"profile"`
+	Cover_photo 			string `json:"cover_photo"`
+	Cover_photo_small		string `json:"cover_photo_small"`
+	Sport_type				string `json:"sport_type"`
+	City 					string `json:"city"`
+	State 					string `json:"state"`
+	Country 				string `json:"country"`
+	Private					bool `json:"private"`
+	Nember_count 			int `json:"member_count"`
+	Featured 				bool `json:"featured"`
+	Verified 				bool `json:"verified"`
+	Url 					string `json:"url"`
+	Membership 				string `json:"membership"`
+	Admin					bool `json:"admin"`
+	Owner 					bool `json:"owner"`
+	Description 			string `json:"description"`
+	Club_type 				string `json:"club_type"`
+	Following_count 		int `json:"following_count"`
 }

@@ -1,16 +1,18 @@
 package main
 
 import (
-  // "fmt"
+  "fmt"
   "../api"
   // "encoding/json"
-  // "../response_bodies"
+  r "../response_bodies"
 )
 func main() {
 
   // api.GetAthleteStats("2316892")
   // fmt.Println(stats)
   // api.GetActivity("1599518530")
-	api.GetAthleteStats("hi")
+  var athlete r.Athlete = api.GetThisAthlete()
+
+  fmt.Println(athlete.Firstname)
   // fmt.Println(api.GetMyActivities())
 }
