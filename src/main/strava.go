@@ -18,8 +18,13 @@ func main() {
 
   // fmt.Println(segment.Effort_count)
 
-  var activity interface{} = api.GetActivity("1745515202")
+  var activity r.Activity = api.GetActivity("1720473515")
 
   fmt.Println(activity)
   // fmt.Println(api.GetMyActivities())
+
+
+
+  // get activity, take segment_efforts
+  // find where pr_rank is not null
 }
