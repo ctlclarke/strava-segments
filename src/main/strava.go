@@ -4,27 +4,23 @@ import (
   "fmt"
   "../api"
   r "../response_bodies"
+  "strconv"
 )
 func main() {
 
-  // api.GetAthleteStats("2316892")
-  // fmt.Println(stats)
-  // api.GetActivity("1599518530")
-  // var athlete r.Athlete = api.GetThisAthlete()
-
-  // fmt.Println(athlete.Firstname)
-
-  // segment := api.GetSegment("1672847")
-
-  // fmt.Println(segment.Effort_count)
-
   var activity r.Activity = api.GetActivity("1720473515")
+  segment_efforts := activity.Segment_efforts
 
-  fmt.Println(activity)
-  // fmt.Println(api.GetMyActivities())
-
-
-
-  // get activity, take segment_efforts
-  // find where pr_rank is not null
+  for _, segment_effort := range segment_efforts {
+  	fmt.Printf(segment_effort.Segment.Name + ": ")
+  	segmentId := segment_effort.Segment.Id
+  	leaderboard := api.GetSegmentLeaderboard(strconv.Itoa(segmentId))
+  	for _, entry := range leaderboard.Entries {
+        if entry.Athlete_name == "Charles C." {
+            fmt.Printf(strconv.Itoa(entry.Rank))
+        }
+  	}
+  	fmt.Printf(" out of ")
+  	fmt.Printf(strconv.Itoa(leaderboard.Entry_count) + "\n")
+  }
 }

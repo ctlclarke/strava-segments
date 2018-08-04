@@ -92,7 +92,7 @@ type Segment_Effort struct {
     Segment                 Activity_Segment `json:"segment"`
     Kom_rank                int     `json:"kom_rank"` // TODO: qq: these 3 are uncertain
     Pr_rank                 int     `json:"pr_rank"`
-    Achievments             []string `json:"achievments"`
+    Achievments             []string `json:"achievments"` // TODO: qq: this isn't correct
     Hidden                  bool    `json:"hidden"`
 }
 

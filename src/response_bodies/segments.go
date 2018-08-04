@@ -44,3 +44,19 @@ type SegStat struct {
 	Pr_date 				string	`json:"pr_date"`
 	Effort_count 			int 	`json:"effort_count"`
 }
+
+type Leaderboard struct {
+	Effort_count int `json:"effort_count"`
+	Entry_count int `json:"entry_count"`
+	Kom_type string `json:"kom_type"`
+	Entries []Entry `json:"entries"`
+}
+
+type Entry struct {
+	Athlete_name string `json:"athlete_name"`
+	Elapsed_time int `json:"elapsed_time"`
+	Moving_time int `json:"moving_time"`
+	Start_date string `json:"start_date"`
+	Start_date_local string `json:"start_date_local"`
+	Rank int `json:"rank"`
+}

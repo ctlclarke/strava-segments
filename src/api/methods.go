@@ -2,7 +2,6 @@ package api
 import (
 	r "../response_bodies"
   "encoding/json"
-  "fmt"
 )
 func GetAthleteStats(athleteId string) r.Athlete {
   url := "https://www.strava.com/api/v3/athletes/" + athleteId + "/stats"
@@ -27,13 +26,21 @@ func GetThisAthlete() r.Athlete {
 func GetSegment(segmentId string) r.Segment { // TODO: qq: untested
   url := "https://www.strava.com/api/v3/segments/" + segmentId
   var segment r.Segment
-  var x = get(url)
-  fmt.Println(x)
   err := json.Unmarshal(get(url), &segment)
   if err != nil {
     panic(err)
   }
   return segment
+}
+
+func GetSegmentLeaderboard(segmentId string) r.Leaderboard {
+  url := "https://www.strava.com/api/v3/segments/" + segmentId + "/leaderboard"
+  var leaderboard r.Leaderboard
+  err := json.Unmarshal(get(url), &leaderboard)
+  if err != nil {
+    panic(err)
+  }
+  return leaderboard
 }
 
 func GetActivity(activityId string) r.Activity {
@@ -57,6 +64,3 @@ func GetActivity(activityId string) r.Activity {
 // 
   // return
 // }
-
-// TODO: qq: get all these to return the objects, not the strings.
-// TODO: qq: or re-objectify them in strava.go?
