@@ -6,7 +6,7 @@ type Activity struct {
     External_id             string  `json:"external_id"`
     Upload_id               int     `json:"upload_id"`
     Athlete                 Activity_Pair `json:"athlete"`
-    Name                    string  `json:"string"`
+    Name                    string  `json:"name"`
     Distance                float32     `json:"distance"`
     Moving_time             int     `json:"moving_time"`
     Elapsed_time            int     `json:"elapsed_time"`
@@ -36,8 +36,8 @@ type Activity struct {
     Flagged                 bool    `json:"flagged"`
     Gear_id                 string  `json:"gear_id"`
     From_accepted_tag       bool    `json:"from_accepted_tag"`
-    Average_speed           float32 `json:"average_speed"`
-    Max_speed               float32 `json:"max_speed"`
+    Average_speed           float64 `json:"average_speed"`
+    Max_speed               float64 `json:"max_speed"`
     Average_cadence         float32 `json:"average_cadence"`
     Average_temp            float32 `json:"average_temp"`
     Average_watts           float32 `json:"average_watts"`
@@ -60,7 +60,7 @@ type Activity struct {
     Laps                    []Lap   `json:"laps"`
     Gear                    Gear    `json:"gear"`
     Partner_brand_tag       bool    `json:"partner_brand_tag"` // TODO: qq: not certain
-    Photos                  Photos  `json:"photos"`
+    Photos                  Photos  `json:"photos"` 
     Highlighted_kudosers    []Highlighted_Kudoser `json:"highlighted_kudosers"`
     Device_name             string  `json:"device_name"`
     Embed_token             string  `json:"embed_token"`
@@ -144,7 +144,7 @@ type Lap struct {
     Distance                float32 `json:"distance"`
     Start_index             int     `json:"start_index"`
     End_index               int     `json:"end_index"`
-    Total_elevation_gain    float32     `json:"total_elevation_gain"`
+    Total_elevation_gain    float32 `json:"total_elevation_gain"`
     Average_speed           float32 `json:"average_speed"`
     Max_speed               float32 `json:"max_speed"`
     Average_cadence         float32 `json:"average_cadence"`

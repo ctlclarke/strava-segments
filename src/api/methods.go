@@ -53,10 +53,15 @@ func GetActivity(activityId string) r.Activity {
   return activity
 }
 
-// func GetMyActivities() response_bodies.Club {
-//   url := "https://www.strava.com/api/v3/athlete/activities"
-//   return get(url)
-// }
+func GetMyActivities() []r.Activity {
+  url := "https://www.strava.com/api/v3/athlete/activities"
+  var activities []r.Activity
+  err := json.Unmarshal(get(url), &activities)
+  if err != nil {
+    panic(err)
+  }
+  return activities
+}
 
 // func GetClub(clubId string, target interface{}){
   // url := "https://www.strava.com/api/v3/clubs/" + clubId
