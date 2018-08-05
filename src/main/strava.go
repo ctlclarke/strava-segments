@@ -5,17 +5,27 @@ import (
   "../api"
   r "../response_bodies"
   "strconv"
+  "sort"
 )
 func main() {
 
-  x := listSegmentsForActivity("1720473837")
-
-  fmt.Println(x)
-
+  listSegmentsByPercentile("1642908894", 30)
 
 }
 
-func listSegmentsForActivity(activityId string) []SegmentRankings{
+func listSegmentsByPercentile(activityId string, percentile float64) {
+  segments := getSegmentRankings(activityId)
+
+  for _, seg := range segments {
+    if seg.Percentile < 30 {
+      fmt.Println(seg.SegmentName + " : " + strconv.FormatFloat(seg.Percentile, 'g', 6, 64))
+      } else {
+        break
+      }
+  }
+}
+
+func getSegmentRankings(activityId string) []SegmentRankings{
     var activity r.Activity = api.GetActivity(activityId)
     var leaderboardPosition int = -1
     var percentile float64 = -1
@@ -44,9 +54,11 @@ func listSegmentsForActivity(activityId string) []SegmentRankings{
 
     }
 
-    return segmentRankings
+    sort.Slice(segmentRankings, func(i, j int) bool {
+      return segmentRankings[i].Percentile < segmentRankings[j].Percentile
+    })
 
-    // To return an array of {segmentId, segmentName, position, efforts?, percentile}
+    return segmentRankings
 }
 
 type SegmentRankings struct {
