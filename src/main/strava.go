@@ -9,12 +9,26 @@ import (
 )
 func main() {
 
-  listSegmentsByPercentile("1642908894", 30)
+  // listSegmentsByPercentile("1642908894", 30)
 
+  fmt.Println("Max speed in last 30 activities: " + strconv.FormatFloat(getMaxSpeed() * 3.6, 'g', 6, 64) + "km/h")
+}
+
+func getMaxSpeed() float64{
+  activities := api.GetMyActivities() // This only gets the 30 most recent activities
+  var max_speed float64 = 0
+
+  for _, activity := range activities {
+    if (activity.Max_speed > max_speed) {
+      max_speed = activity.Max_speed
+    }
+  }
+
+  return max_speed
 }
 
 func listSegmentsByPercentile(activityId string, percentile float64) {
-  segments := getSegmentRankings(activityId)
+  segments := getSegmentRankingsForActivity(activityId, "Charles C.")
 
   for _, seg := range segments {
     if seg.Percentile < 30 {
@@ -25,7 +39,7 @@ func listSegmentsByPercentile(activityId string, percentile float64) {
   }
 }
 
-func getSegmentRankings(activityId string) []SegmentRankings{
+func getSegmentRankingsForActivity(activityId string, athleteName string) []SegmentRankings{
     var activity r.Activity = api.GetActivity(activityId)
     var leaderboardPosition int = -1
     var percentile float64 = -1
@@ -42,7 +56,7 @@ func getSegmentRankings(activityId string) []SegmentRankings{
       leaderboard := api.GetSegmentLeaderboard(strconv.Itoa(segmentId))
 
       for _, entry := range leaderboard.Entries {
-        if entry.Athlete_name == "Charles C." {
+        if entry.Athlete_name == athleteName {
             leaderboardPosition = entry.Rank
         }
       }
